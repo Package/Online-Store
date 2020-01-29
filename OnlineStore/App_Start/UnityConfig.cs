@@ -24,6 +24,9 @@ namespace OnlineStore
             container.RegisterType<IProductService, ProductService>();
             container.RegisterType<IBasketService, BasketService>();
             container.RegisterType<ISearchService, SearchService>();
+            container.RegisterType<IOrderService, OrderService>();
+            container.RegisterType<ICustomerService, CustomerService>();
+            container.RegisterType<IAddressService, AddressService>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

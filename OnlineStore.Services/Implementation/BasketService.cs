@@ -49,5 +49,23 @@ namespace OnlineStore.Services.Implementation
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Returns the total cost of the products in the basket.
+        /// </summary>
+        /// <returns></returns>
+        public decimal GetBasketTotal()
+        {
+            var basket = this.GetProductsInBasket();
+            return basket.Sum(b => b.Price);
+        }
+
+        /// <summary>
+        /// Clears the shopping basket, resetting all the items inside.
+        /// </summary>
+        public void ClearBasket()
+        {
+            CurrentSession[BasketKey] = new List<Product>();
+        }
     }
 }

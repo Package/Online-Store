@@ -14,5 +14,7 @@ namespace OnlineStore.Services.Interfaces
         void AddToBasket(Product product, int quantity = 1);
         void RemoveFromBasket(Product product);
         void UpdateQuantity(Product product, int quantity);
+        void ClearBasket();
+        decimal GetBasketTotal();
     }
 }

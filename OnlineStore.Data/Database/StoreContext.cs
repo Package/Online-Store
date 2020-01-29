@@ -19,9 +19,7 @@ namespace OnlineStore.Data.Database
         public DbSet<Order> Orders { get; set; }
 
         public StoreContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
+            : base("DefaultConnection", throwIfV1Schema: false) {}
 
         public static StoreContext Create()
         {

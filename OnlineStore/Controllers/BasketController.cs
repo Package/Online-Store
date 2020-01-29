@@ -52,6 +52,15 @@ namespace OnlineStore.Controllers
             return RedirectToAction("Details");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Clear()
+        {
+            basketService.ClearBasket();
+
+            return RedirectToAction("Details");
+        }
+
         [HttpGet]
         public ActionResult Details()
         {

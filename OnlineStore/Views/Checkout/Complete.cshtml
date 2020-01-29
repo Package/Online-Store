@@ -1,0 +1,14 @@
+﻿@model OnlineStore.Data.Models.Order
+
+@{
+    ViewBag.Title = "Order Complete";
+}
+
+<h2 class="page-header">Order Complete</h2>
+
+<div class="alert alert-success" role="alert">Thank you for ordering with Grocery Shop. Your order is now being processed.</div>
+
+<p>
+    <a href="@Url.Action("Index", "Order")" class="btn btn-default">View your order history</a>
+    <a href="@Url.Action("Index", "Category")" class="btn btn-default">Start another shop</a>
+</p>

@@ -1,0 +1,70 @@
+﻿@model OnlineStore.ViewModels.CheckoutViewModel
+
+@{
+    ViewBag.Title = "Checkout";
+}
+
+@*<h2 class="page-header">Checkout</h2>*@
+
+<div class="row">
+    <div class="col-md-5">
+        @using (Html.BeginForm("Index", "Checkout", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <h4 class="page-header">Shipping Address</h4>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address.Line1)
+                @Html.EditorFor(model => model.Address.Line1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address.Line1, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address.Line2)
+                @Html.EditorFor(model => model.Address.Line2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address.Line2, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address.Line3)
+                @Html.EditorFor(model => model.Address.Line3, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address.Line3, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address.Line4)
+                @Html.EditorFor(model => model.Address.Line4, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address.Line4, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address.PostCode)
+                @Html.EditorFor(model => model.Address.PostCode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address.PostCode, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address.Country)
+                @Html.EditorFor(model => model.Address.Country, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address.Country, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg">Place Order</button>
+            </div>
+        }
+    </div>
+
+    <div class="col-md-7">
+        <h4 class="page-header">Your Basket</h4>
+        @Html.Partial("_BasketItems", Model.ProductsInBasket)
+        <a href="@Url.Action("Details", "Basket")" class="btn btn-default btn-sm">Edit Basket</a>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
