@@ -23,7 +23,8 @@ namespace OnlineStore
             container.RegisterType<ICategoryService, CategoryService>();
             container.RegisterType<IProductService, ProductService>();
             container.RegisterType<IBasketService, BasketService>();
-            
+            container.RegisterType<ISearchService, SearchService>();
+
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

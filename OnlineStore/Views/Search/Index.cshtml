@@ -1,0 +1,9 @@
+﻿@model OnlineStore.ViewModels.SearchViewModel
+
+@{
+    ViewBag.Title = "Search Results";
+}
+
+<h2>Search Results for @Model.SearchTerm</h2>
+
+@Html.Partial("_ProductTable", Model.Products)

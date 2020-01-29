@@ -6,35 +6,4 @@
 
 <h2>@(Model.Category.Name)</h2>
 
-<table class="table table-bordered">
-    <tr>
-        <th>Name</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.Products)
-    {
-        <tr>
-            <td>
-                @Html.Partial("_ProductNameWithImage", item)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @using (Html.BeginForm("Add", "Basket", FormMethod.Post, new { @class="form-inline"}))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.Hidden("product", item.Id)
-                    <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Add to Basket</button>
-                }
-            </td>
-        </tr>
-    }
-
-</table>
+@Html.Partial("_ProductTable", Model.Products)

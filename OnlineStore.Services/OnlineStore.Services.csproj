@@ -85,9 +85,11 @@
     <Compile Include="Implementation\BasketService.cs" />
     <Compile Include="Implementation\CategoryService.cs" />
     <Compile Include="Implementation\ProductService.cs" />
+    <Compile Include="Implementation\SearchService.cs" />
     <Compile Include="Interfaces\IBasketService.cs" />
     <Compile Include="Interfaces\ICategoryService.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
+    <Compile Include="Interfaces\ISearchService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
