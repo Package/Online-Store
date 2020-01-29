@@ -1,0 +1,51 @@
+﻿@model OnlineStore.Data.Models.Product
+
+@{
+    ViewBag.Title = $"Viewing: {Model.Name}";
+}
+
+<div class="page-header">
+    <h2>@Model.Name  <small>&pound;@Model.Price</small></h2>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <dl class="dl-horizontal">
+            <dt>Available Since:</dt>
+            <dd>@Html.DisplayFor(model => model.Added)</dd>
+
+            <dt>Quantity In Stock:</dt>
+
+            <dd>@Html.DisplayFor(model => model.Quantity)</dd>
+
+            <dt>Product Price:</dt>
+            <dd>&pound;@Html.DisplayFor(model => model.Price)</dd>
+        </dl>
+
+        <div class="add-to-basket-block">
+            @using (Html.BeginForm("Add", "Basket", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("product", Model.Id)
+                <button type="submit" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-plus-sign"></i> Add to Basket</button>
+            }
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <img class="product-detail-image" src="@Url.Content($"~/Images/Products/Product{Model.Id}.png")" />
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Product Info</h3>
+    </div>
+    <div class="panel-body">
+        @Model.DescriptionLong
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Back to List", "Index", "Category")
+</p>

@@ -1,0 +1,56 @@
+﻿body {
+    font-family: 'Roboto', sans-serif;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.navbar {
+    background: #1d2534;
+}
+.navbar a {
+    color: #ccc !important;
+}
+h1, h2, h3, h4,h5,h6 {
+    font-weight: 300 !important;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.add-to-basket-block {
+    margin-bottom: 1em;
+}
+.add-to-basket-block i {
+    margin-right: 0.5em;
+}
+.product-list-image {
+    width: 100%;
+    height: 100%;
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.product-detail-image {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+}

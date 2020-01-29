@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Grocery Store</h1>
+    <p class="lead">Welcome to the Grocery Store... get started by browsing our products below!</p>
+    <p><a href="@Url.Action("Index", "Category")" class="btn btn-primary btn-lg">View groceries &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Great Prices</h2>
+        <p>You won't be disappointed, we offer the best prices for groceries on the market!</p>
+        <p>@*<a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a>*@</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Fresh Produce</h2>
+        <p>Our range of freshly groceries are simply unbeatable. We source only organic produce where possible.</p>
+        <p>@*<a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a>*@</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Free Delivery</h2>
+        <p>We offer free product delivery when you spend £30 or more. Be sure to take advantage as you complete your weekly shop!</p>
+        <p>@*<a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a>*@</p>
+    </div>
+</div>

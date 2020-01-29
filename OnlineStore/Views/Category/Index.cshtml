@@ -1,0 +1,28 @@
+﻿@model IEnumerable<OnlineStore.Data.Models.Category>
+
+@{
+    ViewBag.Title = "Browse Groceries by Category";
+}
+
+<h2>Browse Groceries by Category</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <p>
+                <a href="@Url.Action("Details", new { id = item.Id })">
+                    @item.Name <span class="badge">@(item.Products.Count())</span>
+                </a>
+            </p>
+        </td>
+    </tr>
+}
+
+</table>

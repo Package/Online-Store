@@ -1,0 +1,46 @@
+﻿@model IEnumerable<OnlineStore.Data.Models.Product>
+
+@{
+    ViewBag.Title = "Your Shopping Basket";
+}
+
+<h2 class="page-header">Your Shopping Basket</h2>
+
+<p>
+    @Html.ActionLink("Continue Shopping", "Index", "Category")
+</p>
+
+@if (Model != null && Model.Count() > 0)
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.Partial("_ProductNameWithImage", item)</td>
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                <td>
+                    @using (Html.BeginForm("Remove", "Basket", FormMethod.Post, new { @class = "form-inline" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("product", item.Id)
+                        <button type="submit" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-remove"></i> Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+<div class="alert alert-warning">
+    <p>You have no items in your shopping basket!</p>
+</div>
+}
+

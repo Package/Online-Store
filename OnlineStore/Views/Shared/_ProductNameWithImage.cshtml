@@ -1,0 +1,6 @@
+﻿@model OnlineStore.Data.Models.Product
+
+<a href="@Url.Action("Details", "Product", new { id = Model.Id })">
+    <img class="product-list-image" src="@Url.Content($"~/Images/Products/Product{Model.Id}.png")" title="@Model.Name" alt="@Model.Name" />
+    @Model.Name
+</a>
