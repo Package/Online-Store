@@ -12,7 +12,7 @@ namespace OnlineStore.Services.Implementation
 {
     public class ProductService : IProductService
     {
-        private ICategoryService categoryService { get; set; }
+        private ICategoryService categoryService;
 
         public ProductService(ICategoryService categoryService)
         {

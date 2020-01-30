@@ -13,9 +13,9 @@ namespace OnlineStore.Services.Implementation
 {
     public class OrderService : IOrderService
     {
-        private readonly BasketService basketService;
+        private readonly IBasketService basketService;
 
-        public OrderService(BasketService basketService)
+        public OrderService(IBasketService basketService)
         {
             this.basketService = basketService;
         }

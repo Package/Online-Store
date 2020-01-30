@@ -14,10 +14,11 @@ namespace OnlineStore
     {
         public static void RegisterComponents()
         {
-			var container = new UnityContainer();
+            var container = new UnityContainer();
 
             // Account controller is a bit special
             container.RegisterType<AccountController>(new InjectionConstructor());
+            container.RegisterType<ManageController>(new InjectionConstructor());
 
             // Services
             container.RegisterType<ICategoryService, CategoryService>();
