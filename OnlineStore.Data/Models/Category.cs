@@ -12,6 +12,7 @@ namespace OnlineStore.Data.Models
         [Key]
         public int Id { get; set; }
 
+        [Display(Name="Category Name")]
         public string Name { get; set; }
 
         public string ImagePath { get; set; }

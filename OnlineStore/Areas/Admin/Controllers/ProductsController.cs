@@ -9,28 +9,47 @@ using System.Web;
 using System.Web.Mvc;
 using OnlineStore.Data.Database;
 using OnlineStore.Data.Models;
+using OnlineStore.Services.Interfaces;
+using OnlineStore.Areas.Admin.ViewModels;
+using System.Data.Entity.Migrations;
 
 namespace OnlineStore.Areas.Admin.Controllers
 {
     public class ProductsController : Controller
     {
         private StoreContext db = new StoreContext();
+        private readonly ICategoryService categoryService;
+
+        public ProductsController(ICategoryService categoryService)
+        {
+            this.categoryService = categoryService;
+        }
 
         public async Task<ActionResult> Index()
         {
             return View(await db.Products.ToListAsync());
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var viewModel = new ManageProductViewModel { Categories = await categoryService.GetCategoriesAsync(db) };
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Product product)
+        public async Task<ActionResult> Create(ManageProductViewModel viewModel)
         {
+            // Product defaults
+            var product = viewModel.Product;
             product.Added = DateTime.Now;
+
+            // Manage categories
+            product.Categories = new List<Category>();
+            if (viewModel.MainCategory != null)
+                product.Categories.Add(categoryService.GetCategory(viewModel.MainCategory.Value, db));
+            if (viewModel.SecondaryCategory != null)
+                product.Categories.Add(categoryService.GetCategory(viewModel.SecondaryCategory.Value, db));
 
             if (ModelState.IsValid)
             {
@@ -39,34 +58,56 @@ namespace OnlineStore.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(product);
+            return View(viewModel);
         }
 
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             Product product = await db.Products.FindAsync(id);
             if (product == null)
-            {
                 return HttpNotFound();
+
+            var viewModel = new ManageProductViewModel
+            {
+                Categories = await categoryService.GetCategoriesAsync(db),
+                Product = product,
+            };
+
+            // Set the categories
+            var mainCategory = product.Categories.FirstOrDefault();
+            if (mainCategory != null)
+            {
+                var secondCategory = product.Categories.FirstOrDefault(c => c.Id != mainCategory.Id);
+                viewModel.MainCategory = mainCategory?.Id;
+                viewModel.SecondaryCategory = secondCategory?.Id;
             }
-            return View(product);
+
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(Product product)
+        public async Task<ActionResult> Edit(ManageProductViewModel viewModel)
         {
+            var product = viewModel.Product;
+
+            // Manage product categories
+            product.Categories = new List<Category>();
+            if (viewModel.MainCategory != null)
+                product.Categories.Add(categoryService.GetCategory(viewModel.MainCategory.Value, db));
+            if (viewModel.SecondaryCategory != null)
+                product.Categories.Add(categoryService.GetCategory(viewModel.SecondaryCategory.Value, db));
+
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                db.Products.AddOrUpdate(p => p.Id, product);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(product);
+            return View(viewModel);
         }
 
         public async Task<ActionResult> Delete(int? id)
